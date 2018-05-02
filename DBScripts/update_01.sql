@@ -1,0 +1,1 @@
+RENAME TABLE `refrence` TO `reference`;
