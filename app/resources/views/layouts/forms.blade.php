@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{URL::asset('css/custom.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -19,6 +20,9 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+    
 </head>
 <body>
     <div id="app">

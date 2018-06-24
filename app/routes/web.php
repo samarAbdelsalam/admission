@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+Route::post('/common/getCities','CommonController@getCities');
 
 Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -32,3 +31,6 @@ Route::prefix('admin')->group(function() {
   Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
   Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 });
+
+Route::get('/personalInfo','forms\PersonalInfoController@index');
+Route::post('/personalInfo/save','forms\PersonalInfoController@save');
