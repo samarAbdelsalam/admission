@@ -18,6 +18,9 @@ return [
     'after'                => 'The :attribute must be a date after :date.',
     'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
     'alpha'                => 'The :attribute may only contain letters.',
+    'alpha_spaces'         => 'The :attribute may only contain letters, underscores, spaces, and dashes.', 
+    'alpha_num_spaces'     =>  'The :attribute may only contain letters, numbers and spaces.',
+    'phone'                =>'The :attribute may only contain numbers and + sing only.',
     'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
     'alpha_num'            => 'The :attribute may only contain letters and numbers.',
     'array'                => 'The :attribute must be an array.',
@@ -85,6 +88,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    'grade'                => 'The :attribute may contain numbers or precentage only.',
 
     /*
     |--------------------------------------------------------------------------
