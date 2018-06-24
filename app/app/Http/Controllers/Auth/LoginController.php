@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use DB;
 use Auth;
 use App\Submission;
+use App\Application;
 use Carbon\Carbon;
-use DB;
 use storage;
 
 class LoginController extends Controller {
@@ -47,16 +49,17 @@ use AuthenticatesUsers;
 
     protected function authenticated(Request $request, $user) {
 
-        $submission = \DB::table('tbl_submissions')->orderBy('id', 'DESC')->first();
-        $app = Application::where('user_id', '=', $user->id)->where('submission_id', '=', $submission->id)->get()->first();
-        if (empty($app)) {
+        $submission = \DB::table('submission')->orderBy('id', 'DESC')->first();
+        $app = Application::where('users_id', '=', $user->id)->where('submission_id', '=', $submission->id)->get()->first();
+        //dd($app);
+        if (is_null($app)) {
             $app = new Application;
-            $app->user_id = $user->id;
+            $app->users_id = $user->id;
             $app->submission_id = $submission->id;
             $app->save();
             //create user directory here
-            $dirName = str_replace(' ', '_', $user->name);
-            $this->createUserDir($dirName);
+            //$dirName = str_replace(' ', '_', $user->name);
+           // $this->createUserDir($dirName);
         } else {
             if ($app->status == 0) {
                 return redirect('/personalInfo');
