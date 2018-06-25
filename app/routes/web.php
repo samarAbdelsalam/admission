@@ -34,3 +34,6 @@ Route::prefix('admin')->group(function() {
 
 Route::get('/personalInfo','forms\PersonalInfoController@index');
 Route::post('/personalInfo/save','forms\PersonalInfoController@save');
+
+Route::get('/contactInfo','forms\ContactInfoController@index');
+Route::post('/contactInfo/save','forms\ContactInfoController@save');

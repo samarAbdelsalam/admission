@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2018 at 02:12 PM
+-- Generation Time: Jun 25, 2018 at 11:11 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -144,7 +144,7 @@ CREATE TABLE `contact_info` (
   `email` varchar(30) DEFAULT NULL,
   `postal_code` varchar(10) DEFAULT NULL,
   `street` varchar(25) DEFAULT NULL,
-  `buliding_number` varchar(10) DEFAULT NULL
+  `building_number` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -580,6 +580,12 @@ ALTER TABLE `application`
 --
 ALTER TABLE `city`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=402910;
+
+--
+-- AUTO_INCREMENT for table `contact_info`
+--
+ALTER TABLE `contact_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `department`
