@@ -37,3 +37,6 @@ Route::post('/personalInfo/save','forms\PersonalInfoController@save');
 
 Route::get('/contactInfo','forms\ContactInfoController@index');
 Route::post('/contactInfo/save','forms\ContactInfoController@save');
+
+Route::get('/occupation','forms\OccupationController@index');
+Route::post('/occupation/save','forms\OccupationController@save');
