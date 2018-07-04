@@ -44,3 +44,5 @@ Route::post('/occupation/save','forms\OccupationController@save');
 Route::get('/englishTest','forms\EnglishTestController@index');
 Route::post('/englishTest/save','forms\EnglishTestController@save');
 
+Route::get('/financialInfo','forms\FinancialSourceController@index');
+Route::post('/financialInfo/save','forms\FinancialSourceController@save');
