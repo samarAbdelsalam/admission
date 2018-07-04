@@ -40,3 +40,7 @@ Route::post('/contactInfo/save','forms\ContactInfoController@save');
 
 Route::get('/occupation','forms\OccupationController@index');
 Route::post('/occupation/save','forms\OccupationController@save');
+
+Route::get('/englishTest','forms\EnglishTestController@index');
+Route::post('/englishTest/save','forms\EnglishTestController@save');
+
