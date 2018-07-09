@@ -46,3 +46,6 @@ Route::post('/englishTest/save','forms\EnglishTestController@save');
 
 Route::get('/financialInfo','forms\FinancialSourceController@index');
 Route::post('/financialInfo/save','forms\FinancialSourceController@save');
+
+Route::get('/reference','forms\ReferenceInfoController@index');
+Route::post('/reference/save','forms\ReferenceInfoController@save');
