@@ -29,34 +29,49 @@ class AcademicInterestController extends Controller {
 
     public function index1() {
         $app_id = AcademicInterestController::getAppId();
-        $topics1 = AcademicInterestResearchTopic::where('application_id', '=' . $app_id)->get()->all();
         $academicIterest = AcademicInterest::where('application_id', '=', $app_id)->get()->first();
-        $selectedMajor = $academicIterest->major;
-        $departments = \App\Department::where('major_id', '=', $selectedMajor);
+        $selectedMajor = $academicIterest->major_id;
+        $selectedDept1 = AcademicInterestResearchTopic::where('application_id', '=', $app_id)->where('priority', '=', 1)->get()->all();
+        if (count($selectedDept1) > 0) {
+            $selectedDept1 = $selectedDept1[0]->dept_id;
+            $selectedTopics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)
+                            ->where('dept_id', '=', $selectedDept1)->get()->all();
+            //dd($selectedTopics);
 
-        if (count($topics1) > 0) {
-            $topics1 = $topics1[0];
+            $topics = ResearchTopic::where('department_id', '=', $selectedDept1)
+                            ->where('display', '=', 1)->get()->all();
         } else {
-            $topics1 = new AcademicInterestResearchTopic;
+            $selectedDept1 = null;
+            $selectedTopics = array();
+            $topics = array();
         }
+        $departments = \App\Department::where('school_id', '=', $selectedMajor)->where('display', '=', 1)->get()->all();
 
-        return view('forms.researchTopic1', compact('topics1', 'departments'));
+
+        return view('forms.academicInterestTopics1', compact('departments', 'selectedDept1', 'selectedTopics', 'topics'));
     }
 
     public function index2() {
         $app_id = AcademicInterestController::getAppId();
-        $topics2 = AcademicInterestResearchTopic::where('application_id', '=' . $app_id)->get()->all();
         $academicIterest = AcademicInterest::where('application_id', '=', $app_id)->get()->first();
-        $selectedMajor = $academicIterest->major;
-        $departments = \App\Department::where('major_id', '=', $selectedMajor);
+        $selectedMajor = $academicIterest->major_id;
+        //$perviouslySelectedDepartment = AcademicInterestResearchTopic
+//        $selectedDept2 = AcademicInterestResearchTopic::where('application_id','=',$app_id)->get()->all();
 
-        if (count($topics2) > 1) {
-            $topics2 = $topics2[1];
+        if (!is_null($selectedDept2)) {
+            $selectedDept2 = $selectedDept2->dept_id;
+            $selectedTopics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)
+                            ->where('dept_id', '=', $selectedDept2)->get()->all();
+            $topics = ResearchTopic::where('department_id', '=', $selectedDept2)
+                            ->where('display', '=', 1)->get()->all();
         } else {
-            $topics2 = new AcademicInterestResearchTopic;
+            $selectedDept2 = null;
+            $selectedTopics = array();
+            $topics = array();
         }
+        $departments = \App\Department::where('school_id', '=', $selectedMajor)->where('display', '=', 1)->get()->all();
 
-        return view('forms.researchTopic1', compact('topics2', 'departments'));
+        return view('forms.academicInterestTopics2', compact('departments', 'selectedDept2', 'selectedTopics', 'topics'));
     }
 
     private function validator(array $data) {
@@ -74,14 +89,14 @@ class AcademicInterestController extends Controller {
         ]);
     }
 
-    public function save(){
+    public function save() {
         $this->validator(request()->all())->validate();
         $major = request('major');
         $semseter = request('semester');
         $degree = request('degree');
         $app_id = AcademicInterestController::getAppId();
-        $academicInterest = AcademicInterest::where('application_id','=',$app_id)->get()->first();
-        if(is_null($academicInterest)){
+        $academicInterest = AcademicInterest::where('application_id', '=', $app_id)->get()->first();
+        if (is_null($academicInterest)) {
             $academicInterest = new AcademicInterest;
             $academicInterest->application_id = $app_id;
         }
@@ -89,10 +104,10 @@ class AcademicInterestController extends Controller {
         $academicInterest->semester = $semseter;
         $academicInterest->applied_degree = $degree;
         $academicInterest->save();
-        
     }
-    
+
     public function saveTopics1() {
+        //dd(request('topics'));
         $this->validatorTopics(request()->all())->validate();
         $app_id = AcademicInterestController::getAppId();
 
@@ -107,6 +122,8 @@ class AcademicInterestController extends Controller {
             $topic = new AcademicInterestResearchTopic;
             $topic->dept_id = $department;
             $topic->topic_id = $t;
+            $topic->application_id = $app_id;
+            $topic->priority = 1;
             $topic->save();
         }
     }
@@ -115,8 +132,7 @@ class AcademicInterestController extends Controller {
 
         if (!is_null(request('department'))) {
 
-            $this->validator(request()->all())->validate();
-
+            $this->validatorTopics(request()->all())->validate();
             $app_id = AcademicInterestController::getAppId();
 
             $department = request('department');
@@ -130,28 +146,12 @@ class AcademicInterestController extends Controller {
                 $topic = new AcademicInterestResearchTopic;
                 $topic->dept_id = $department;
                 $topic->topic_id = $t;
+                $topic->application_id = $app_id;
+                $topic->priority = 2;
                 $topic->save();
             }
         }
     }
-
-//    public function save(){
-//        
-//        $this->validator(request()->all())->validate();
-//        $term = request('term');
-//        $applied_degree = request('degree');
-//        $major_id = request('major');
-//        $app_id = AcademicInterestController::getAppId();
-//        $academicInterest = AcademicInterest::where('application_id','=',$app_id);
-//        if(is_null($academicInterest)){
-//            $academicInterest = new AcademicInterest;
-//            $academicInterest->application_id = $app_id;
-//        }
-//        $academicInterest->major_id = $major_id;
-//        $academicInterest->applied_degree = $applied_degree;
-//        $academicInterest->term = $term;
-//        $academicInterest->save();
-//    }
 
     public function removeTopic() {
         $id = request('topicId');

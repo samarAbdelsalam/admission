@@ -60,7 +60,7 @@ Route::get('/academicInterest','forms\AcademicInterestController@index');
 Route::post('/academicInterest/save','forms\AcademicInterestController@save');
 
 Route::get('/academicInterestTopic1','forms\AcademicInterestController@index1');
-Route::post('/academicInterest/saveTopic1','AcademicInterestController@saveTopics1');
+Route::post('/academicInterest/saveTopic1','forms\AcademicInterestController@saveTopics1');
 
 Route::get('/academicInterestTopic2','forms\AcademicInterestController@index2');
 Route::post('/academicInterest/saveTopic2','forms\AcademicInterestController@saveTopics2');
