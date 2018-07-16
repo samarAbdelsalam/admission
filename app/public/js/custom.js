@@ -28,3 +28,46 @@ function getCities(country_id, cityinputid) {
 
     }
 }
+
+function getDepartments(majorId,selectId){
+ 
+   
+    var major_id = majorId;
+    $.ajax({
+        data:{'major' : majorId},
+        type:'post',
+        url:'/common/getDepartments',
+        success:function(response){
+            
+            $('#'+selectId).empty();
+          //  response = JSON.parse(response);
+            var depts = response.departments;
+            for(var  i =0 ;i<depts.length ;i++){
+                $('#'+selectId).append("<option value="+depts[i].id+">"+depts[i].name+"</option>");
+            }
+           // $('#'+selectId).multiselect('rebuild');
+        }
+        
+    });
+    
+}
+
+function getTopics(deptId,selectId){
+    
+    var deptId = deptId;
+    $.ajax({
+            data:{'deptId' : deptId},
+            type:'post',
+            url: '/common/getTopics',
+            success: function(response){
+                $('#'+selectId).empty();
+                var topics = response.topics;
+                for(var i=0;i<topics.length;i++){
+                    $('#'+selectId).append("<option value="+ topics[i].id+">"+topics[i].name+"</option>");
+                }
+            }
+        });
+
+}
+
+

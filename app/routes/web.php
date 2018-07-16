@@ -18,6 +18,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Route::post('/common/getCities','CommonController@getCities');
+Route::post('/common/getDepartments','CommonController@getDepartments');
+Route::post('/common/getTopics','CommonController@getTopics');
 
 Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -49,3 +51,16 @@ Route::post('/financialInfo/save','forms\FinancialSourceController@save');
 
 Route::get('/reference','forms\ReferenceInfoController@index');
 Route::post('/reference/save','forms\ReferenceInfoController@save');
+
+//Route::get('/academicInterest','forms\AcademicInterestController@index');
+//Route::post('academicReseachTopics/saveTopic','forms\AcademicInterestController@saveTopic');
+//Route::post('academicReseachTopics/delete','forms\AcademicInterestController@delete');
+
+Route::get('/academicInterest','forms\AcademicInterestController@index');
+Route::post('/academicInterest/save','forms\AcademicInterestController@save');
+
+Route::get('/academicInterestTopic1','forms\AcademicInterestController@index1');
+Route::post('/academicInterest/saveTopic1','AcademicInterestController@saveTopics1');
+
+Route::get('/academicInterestTopic2','forms\AcademicInterestController@index2');
+Route::post('/academicInterest/saveTopic2','forms\AcademicInterestController@saveTopics2');
