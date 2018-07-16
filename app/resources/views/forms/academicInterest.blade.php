@@ -5,7 +5,8 @@
 <script>
     $(document).ready(function(){
         @if(!is_null($academicInterest))
-            var selectedMajor = "{{$academicInterest->major}}";
+            debugger;
+            var selectedMajor = "{{$academicInterest->major_id}}";
             $('#major').val(selectedMajor);
             
             var semester = "{{$academicInterest->semester}}";
