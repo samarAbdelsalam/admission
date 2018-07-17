@@ -36,7 +36,7 @@
                     </div>
                     @endif
                     @include('layouts.errors')
-                    <form method="post" action="/academicInterest/saveTopic1">
+                    <form method="post" action="/academicInterest/saveTopic2">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token">
                         <div class="form-group required">
                             <label class="control-label">Department</label>

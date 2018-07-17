@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{URL::asset('css/custom.css')}}" rel="stylesheet">
-    <!--<link href="{{URL::asset('css/bootstrap-multiselect.css')}}" rel="stylesheet">-->
+    <link href="{{URL::asset('css/bootstrap-multiselect.css')}}" rel="stylesheet">
     
 
     <!-- Scripts -->
@@ -23,7 +23,6 @@
         ]) !!};
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
    
     
 </head>
@@ -90,12 +89,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-        <script type="text/javascript" src="{{ URL::asset('js/bootstrap-multiselect.js') }}"></script>
-    
-    <script>
-//            $(document).ready(function(){
-//                 $('#dept').multiselect();
-//            });
-    </script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-multiselect.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+
 </body>
 </html>

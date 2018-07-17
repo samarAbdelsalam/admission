@@ -56,14 +56,18 @@ class AcademicInterestController extends Controller {
         $academicIterest = AcademicInterest::where('application_id', '=', $app_id)->get()->first();
         $selectedMajor = $academicIterest->major_id;
         //$perviouslySelectedDepartment = AcademicInterestResearchTopic
-//        $selectedDept2 = AcademicInterestResearchTopic::where('application_id','=',$app_id)->get()->all();
+        $selectedDept2 = AcademicInterestResearchTopic::where('application_id','=',$app_id)
+                                                        ->where('priority','=',2)->get()->all();
+       // dd($selectedDept2);
 
-        if (!is_null($selectedDept2)) {
-            $selectedDept2 = $selectedDept2->dept_id;
+        if (count($selectedDept2) > 0) {
+            $selectedDept2 = $selectedDept2[0]->dept_id;
             $selectedTopics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)
-                            ->where('dept_id', '=', $selectedDept2)->get()->all();
+                            ->where('dept_id', '=', $selectedDept2)
+                            ->where('priority','=',2)->get()->all();
+           // dd($selectedTopics);
             $topics = ResearchTopic::where('department_id', '=', $selectedDept2)
-                            ->where('display', '=', 1)->get()->all();
+                                     ->where('display', '=', 1)->get()->all();
         } else {
             $selectedDept2 = null;
             $selectedTopics = array();
@@ -85,7 +89,7 @@ class AcademicInterestController extends Controller {
     private function validatorTopics(array $data) {
         return Validator::make($data, [
                     'department' => 'required|integer',
-                    'topics' => 'required|array|max:3|min:2'
+                    'topics' => 'required|array|max:3|min:1'
         ]);
     }
 
@@ -107,16 +111,16 @@ class AcademicInterestController extends Controller {
     }
 
     public function saveTopics1() {
-        //dd(request('topics'));
         $this->validatorTopics(request()->all())->validate();
         $app_id = AcademicInterestController::getAppId();
-
         $department = request('department');
         $newTopics = request('topics');
         $topics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)->get()->all();
         if (count($topics) > 0) {
             //Delete the old and save all again
-            $topics->delete();
+           foreach($topics as $t){
+               $t->delete();
+           }
         }
         foreach ($newTopics as $t) {
             $topic = new AcademicInterestResearchTopic;
@@ -129,18 +133,18 @@ class AcademicInterestController extends Controller {
     }
 
     public function saveTopics2() {
-
         if (!is_null(request('department'))) {
-
             $this->validatorTopics(request()->all())->validate();
             $app_id = AcademicInterestController::getAppId();
-
             $department = request('department');
             $newTopics = request('topics');
-            $topics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)->get()->all();
+            $topics = AcademicInterestResearchTopic::where('application_id', '=', $app_id)
+                                                    ->where('priority','=',2)->get()->all();
             if (count($topics) > 0) {
                 //Delete the old and save all again
-                $topics->delete();
+                foreach ($topics as $t){
+                    $t->delete();
+                }
             }
             foreach ($newTopics as $t) {
                 $topic = new AcademicInterestResearchTopic;
@@ -153,16 +157,17 @@ class AcademicInterestController extends Controller {
         }
     }
 
-    public function removeTopic() {
-        $id = request('topicId');
-        if (!empty($id) && is_numeric($id)) {
-
-            $app_id = AcademicInterestController::getAppId();
-            $topic = AcademicInterestResearchTopic::where('application_id', '=', $app_id)->where('topic_id', '=', $id);
-            $topic->delete();
+    public function removeDept() {
+        $app_id = AcademicInterestController::getAppId();
+        $academicInterestTopics = AcademicInterestResearchTopic::where('application_id','=',$app_id)
+                                                                ->where('prioprity','=',2)->get()->all();
+        if(count($academicInterestTopics) > 0){
+            foreach ($academicInterestTopics as $t){
+                $t->delete();
+            }
             return response()->json(['success' => true]);
         }
-    }
+     }
 
 //    public function saveTopic() {
 //        $topic_id = request('topic_id');

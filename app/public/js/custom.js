@@ -65,9 +65,13 @@ function getTopics(deptId,selectId){
                 for(var i=0;i<topics.length;i++){
                     $('#'+selectId).append("<option value="+ topics[i].id+">"+topics[i].name+"</option>");
                 }
+                $('#'+selectId).multiselect('rebuild');
             }
         });
 
 }
 
-
+$(document).ready(function(){
+    //debugger;
+    $('form #topics').multiselect()
+});
