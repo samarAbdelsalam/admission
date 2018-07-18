@@ -16,6 +16,21 @@
                 $("#topics option[value = '{{$topic->topic_id}}']").prop('selected','selected');
             @endforeach
         @endif    
+        $('#remove').click(function(){
+           $.ajax({
+              url:'/academicInterest/removeDept',
+              type:'post',
+              data:{'_token':'{{csrf_token()}}'},
+              success: function(response){
+                  if(response.success == true){
+                      $('#topics').clear();
+                      
+                  }
+              }
+           });
+           
+        });
+        
     });
 </script>
 
@@ -24,7 +39,7 @@
 
         <div class="col-md-8 form-container">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Step 6 of 14 </h3><h2>Academic Interest Second Desired Department</h2></div>
+                <div class="panel-heading"><h3>Step 7 of 14 </h3><h2>Academic Interest Second Desired Department</h2></div>
                 <div class="panel-body">
                     @if(Session::has('success'))
                     <div class="row">
@@ -53,6 +68,9 @@
                                 <option value="">Select Topics</option>
                                     
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="btn btn-danger" value="remove" id="remove">
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save and Next" class="btn btn-primary pull-right">

@@ -13,13 +13,6 @@ use App\Http\Controllers\Controller;
 class AcademicInterestController extends Controller {
 
     public function index() {
-//        $app_id = AcademicInterestController::getAppId();
-//        $academicInterest = AcademicInterest::where('application_id', '=', $app_id)->get()->all();
-//        $major = Major::get()->all();
-//        $topics = AcademicInterestResearchTopic::where('application_id','=',$app_id)->get()->all(); 
-//        
-//        return view('forms.academicInterest', compact('academicInterest', 'major','topics'));
-
         $app_id = AcademicInterestController::getAppId();
         $academicInterest = AcademicInterest::where('application_id', '=', $app_id)->get()->first();
         $major = Major::get()->all();
