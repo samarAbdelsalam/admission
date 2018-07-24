@@ -23,7 +23,7 @@
 
         <div class="col-md-8 form-container">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Step 6 of 14 </h3><h2>Academic Interest</h2></div>
+                <div class="panel-heading"><h3>Step 5 of 11 </h3><h2>Academic Interest</h2></div>
                 <div class="panel-body">
                     @if(Session::has('success'))
                     <div class="row">

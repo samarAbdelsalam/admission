@@ -64,3 +64,6 @@ Route::post('/academicInterest/saveTopic1','forms\AcademicInterestController@sav
 
 Route::get('/academicInterestTopic2','forms\AcademicInterestController@index2');
 Route::post('/academicInterest/saveTopic2','forms\AcademicInterestController@saveTopics2');
+
+Route::get('/academicBackground','forms\AcademicBackgroundController@index');
+Route::post('/academicBackground/save','forms\AcademicBackgroundController@save');

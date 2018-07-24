@@ -34,7 +34,7 @@ class PersonalInfoController extends Controller
     }
    
     private function validator(array $data){
-           $rules = [
+           $rules = array(
             'first_name'        => 'required|alpha_spaces|max:30|min:3',
             'middle_name'       => 'required|alpha_spaces|max:30|min:3',
             'last_name'         => 'required|alpha_spaces|max:30|min:3',
@@ -47,18 +47,18 @@ class PersonalInfoController extends Controller
             'id_issue_date'     => 'required|date',
             'marital_status'    => 'required|alpha|max:20',
             'nationality'       => 'required|Integer',
-        ];
+        );
         if($data['gender'] == 'Male'){
          
-           $rules = array_merge($rules,[
+           $rules = array_merge($rules,array(
                 
                 'military_number'   => 'required|alpha_num|max:30',
                 'trible_military_number' => 'required|alpha_num|max:30',
                 'military_region' => 'required|alpha_num|max:30',
                 'military_status'   =>'required|alpha_spaces|max:20'
-
-                
-            ]);
+               
+                )
+            );
         }
           return Validator::make($data,$rules);
           

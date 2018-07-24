@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Validator;
 
 class EnglishTestController extends Controller
 {
+    public function __construct() {
+        
+        $this->middleware('auth');
+    }
     public function index(){
         $app_id = EnglishTestController::getAppId();
         $englishTest = EnglishTest::where('application_id','=',$app_id)->get()->first();

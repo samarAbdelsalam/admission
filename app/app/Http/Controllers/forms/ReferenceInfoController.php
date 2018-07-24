@@ -9,6 +9,10 @@ use App\Reference;
 
 class ReferenceInfoController extends Controller
 {
+    public function __construct() {
+        
+        $this->middleware('auth');
+    }
     public function index(){
         
         $app_id = ReferenceInfoController::getAppId();
